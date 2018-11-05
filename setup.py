@@ -33,6 +33,7 @@ setup(name='tfnumpy',
       tests_require=[
           'unittest2',
       ],
+      scripts=['bin/tfsammon'],
       include_package_data=True,
       test_suite="test",
       zip_safe=False)
