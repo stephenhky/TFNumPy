@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='tfnumpy',
-      version="0.0.1a01",
+      version="0.0.1",
       description="Collection of Simple Numerical Routines using TensorFlow",
       long_description="Collection of simple numerical routines that uses TensorFlow",
       classifiers=[
