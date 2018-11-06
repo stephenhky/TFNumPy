@@ -26,7 +26,7 @@ class test_tetrahedron(unittest.TestCase):
         N = sampled_points.shape[0]
         d = sampled_points.shape[1]
 
-        embed_pts = tfnumpy.embed.sammon_embedding(sampled_points)
+        embed_pts = tfnumpy.embed.sammon_embedding(sampled_points, init_points)
 
         self.assertEqual(embed_pts.shape[1], 2)
         self.assertEqual(embed_pts.shape[0], N)
