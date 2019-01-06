@@ -3,7 +3,14 @@ import numpy as np
 import tensorflow as tf
 
 
-def fit_linear_regression(trainX, trainY, alpha=0.01, max_iter=1000, display_step=50, converged_tol=1e-8, to_print=False):
+def fit_linear_regression(trainX, trainY,
+                          learning_rate=0.01,
+                          ridge_alpha=0.0,
+                          lasso_alpha=0.0,
+                          max_iter=1000,
+                          display_step=50,
+                          converged_tol=1e-8,
+                          to_print=False):
     # check dimensions
     assert trainX.shape[0] == trainY.shape[0]   # number of training data the same
 
@@ -23,10 +30,12 @@ def fit_linear_regression(trainX, trainY, alpha=0.01, max_iter=1000, display_ste
     pred_Y = tf.multiply(theta, X) + b
 
     # cost function
-    cost = tf.reduce_sum(tf.pow(pred_Y - Y, 2)) / nbtrain.value
+    cost = tf.reduce_sum(tf.square(pred_Y - Y)) / nbtrain.value \
+                + ridge_alpha * (tf.reduce_sum(tf.square(theta)) + tf.square(b)) \
+                + lasso_alpha * (tf.reduce_sum(tf.abs(theta)) + tf.abs(b))
 
     # training the machine
-    optimizer = tf.train.GradientDescentOptimizer(alpha).minimize(cost)
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
     initializer = tf.global_variables_initializer()
     with tf.Session() as sess:
         sess.run(initializer)
@@ -59,4 +68,5 @@ def fit_linear_regression(trainX, trainY, alpha=0.01, max_iter=1000, display_ste
         trained_theta = sess.run(theta)
         trained_b = sess.run(b)
 
-    return {'theta': trained_theta, 'b': trained_b, 'cost': training_cost}
+    return {'theta': trained_theta, 'b': trained_b, 'cost': training_cost, 'epoch': epoch,
+            'nbfeatures': nbfeatures.value, 'nbtrain': nbtrain.value}

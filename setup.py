@@ -23,7 +23,7 @@ setup(name='tfnumpy',
       author_email="stephenhky@yahoo.com.hk",
       license='MIT',
       packages=['tfnumpy',
-                'tfnumpy.embed'
+                'tfnumpy.embed',
                 'tfnumpy.regression',
                 ],
       install_requires=[
