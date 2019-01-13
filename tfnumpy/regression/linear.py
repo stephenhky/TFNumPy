@@ -30,14 +30,20 @@ def fit_linear_regression(trainX, trainY,
     pred_Y = tf.multiply(theta, X) + b
 
     # cost function
-    cost = tf.reduce_sum(tf.square(pred_Y - Y)) / nbtrain.value \
-                + ridge_alpha * (tf.reduce_sum(tf.square(theta)) + tf.square(b)) \
-                + lasso_alpha * (tf.reduce_sum(tf.abs(theta)) + tf.abs(b))
+    cost = tf.reduce_sum(tf.square(pred_Y - Y)) / nbtrain.value
+    # regularization
+    if ridge_alpha is not None and ridge_alpha!=0:
+        cost += ridge_alpha * (tf.reduce_sum(tf.square(theta)) + tf.square(b))
+    if lasso_alpha is not None and lasso_alpha!=0:
+        cost += lasso_alpha * (tf.reduce_sum(tf.abs(theta)) + tf.abs(b))
 
     # training the machine
     optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
     initializer = tf.global_variables_initializer()
-    with tf.Session() as sess:
+
+    sess = tf.Session()
+
+    with sess:
         sess.run(initializer)
 
         old_cost = sess.run(cost)
@@ -68,5 +74,11 @@ def fit_linear_regression(trainX, trainY,
         trained_theta = sess.run(theta)
         trained_b = sess.run(b)
 
-    return {'theta': trained_theta, 'b': trained_b, 'cost': training_cost, 'epoch': epoch,
-            'nbfeatures': nbfeatures.value, 'nbtrain': nbtrain.value}
+    fitted_params = {'theta': trained_theta,
+                     'b': trained_b,
+                     'cost': training_cost,
+                     'nbepoch': epoch,
+                     'nbfeatures': nbfeatures.value,
+                     'nbtrain': nbtrain.value}
+
+    return fitted_params, sess
