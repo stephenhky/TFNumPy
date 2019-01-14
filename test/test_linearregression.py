@@ -22,7 +22,7 @@ class LinearRegressionTester(unittest.TestCase):
         self.assertAlmostEqual(regressed_results['b'], -1.20, 2)
 
     def test_ridge(self):
-        ridge_reg = Ridge(alpha=0.1, solver='choleskly')
+        ridge_reg = Ridge(alpha=0.1, solver='cholesky')
         ridge_reg.fit(self.xtrain, self.ytrain)
 
         tfnp_reg, _ = fit_linear_regression(self.xtrain, self.ytrain, max_iter=2000, ridge_alpha=0.1)

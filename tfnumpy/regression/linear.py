@@ -42,37 +42,35 @@ def fit_linear_regression(trainX, trainY,
     initializer = tf.global_variables_initializer()
 
     sess = tf.Session()
+    sess.run(initializer)
 
-    with sess:
-        sess.run(initializer)
+    old_cost = sess.run(cost)
 
-        old_cost = sess.run(cost)
-
-        # Fit all training data
-        for epoch in range(max_iter):
-            sess.run(optimizer)
-
-            if to_print:
-                # Display logs per epoch step
-                if (epoch + 1) % display_step == 0:
-                    c = sess.run(cost)
-                    print("Epoch:", '%04d' % (epoch + 1), "cost=", "{:.9f}".format(c), \
-                          "theta=", sess.run(theta), "b=", sess.run(b))
-
-            if converged_tol is not None:
-                new_cost = sess.run(cost)
-                if abs(new_cost - old_cost) < converged_tol:
-                    break
-                else:
-                    old_cost = new_cost
+    # Fit all training data
+    for epoch in range(max_iter):
+        sess.run(optimizer)
 
         if to_print:
-            print("Optimization Finished!")
+            # Display logs per epoch step
+            if (epoch + 1) % display_step == 0:
+                c = sess.run(cost)
+                print("Epoch:", '%04d' % (epoch + 1), "cost=", "{:.9f}".format(c), \
+                      "theta=", sess.run(theta), "b=", sess.run(b))
 
-        # extract value
-        training_cost = sess.run(cost)
-        trained_theta = sess.run(theta)
-        trained_b = sess.run(b)
+        if converged_tol is not None:
+            new_cost = sess.run(cost)
+            if abs(new_cost - old_cost) < converged_tol:
+                break
+            else:
+                old_cost = new_cost
+
+    if to_print:
+        print("Optimization Finished!")
+
+    # extract value
+    training_cost = sess.run(cost)
+    trained_theta = sess.run(theta)
+    trained_b = sess.run(b)
 
     fitted_params = {'theta': trained_theta,
                      'b': trained_b,
