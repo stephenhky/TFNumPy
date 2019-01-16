@@ -13,27 +13,29 @@ def fit_linear_regression(trainX, trainY,
                           to_print=False):
     # check dimensions
     assert trainX.shape[0] == trainY.shape[0]   # number of training data the same
+    nbtrain = trainX.shape[0]
+    nbfeatures = trainX.shape[1]
 
     # placeholder
-    X = tf.constant(trainX, dtype='float', name='X')
-    Y = tf.constant(trainY, dtype='float', name='Y')
+    X = tf.placeholder(tf.float32, shape=(None, nbfeatures), name='X')
+    Y = tf.placeholder(tf.float32, shape=(None, 1), name='Y')
 
     # Dimension placeholder
-    nbtrain = X.shape[0]
-    nbfeatures = X.shape[1]
+    # nbtrain_var = X.shape[0]
+    # nbfeatures_var = X.shape[1]
 
     # fitting parameters
-    theta = tf.Variable(np.random.uniform(size=nbfeatures), name='theta', dtype='float')
+    theta = tf.Variable(np.random.uniform(size=(nbfeatures, 1)), name='theta', dtype='float')
     b = tf.Variable(np.random.uniform(), name='b', dtype='float')
 
     # fitting function
-    pred_Y = tf.multiply(theta, X) + b
+    pred_Y = tf.matmul(X, theta) + b
 
     # cost function
-    cost = tf.reduce_sum(tf.square(pred_Y - Y)) / nbtrain.value
+    cost = tf.reduce_mean(tf.square(pred_Y - Y))
     # regularization
     if ridge_alpha is not None and ridge_alpha!=0:
-        cost += ridge_alpha * (tf.reduce_sum(tf.square(theta)) + tf.square(b))
+        cost += 0.5 * ridge_alpha * (tf.reduce_sum(tf.square(theta)) + tf.square(b))
     if lasso_alpha is not None and lasso_alpha!=0:
         cost += lasso_alpha * (tf.reduce_sum(tf.abs(theta)) + tf.abs(b))
 
@@ -44,21 +46,21 @@ def fit_linear_regression(trainX, trainY,
     sess = tf.Session()
     sess.run(initializer)
 
-    old_cost = sess.run(cost)
+    old_cost = sess.run(cost, feed_dict={X: trainX, Y: trainY})
 
     # Fit all training data
     for epoch in range(max_iter):
-        sess.run(optimizer)
+        sess.run(optimizer, feed_dict={X: trainX, Y: trainY})
 
         if to_print:
             # Display logs per epoch step
             if (epoch + 1) % display_step == 0:
-                c = sess.run(cost)
+                c = sess.run(cost, feed_dict={X: trainX, Y: trainY})
                 print("Epoch:", '%04d' % (epoch + 1), "cost=", "{:.9f}".format(c), \
                       "theta=", sess.run(theta), "b=", sess.run(b))
 
         if converged_tol is not None:
-            new_cost = sess.run(cost)
+            new_cost = sess.run(cost, feed_dict={X: trainX, Y: trainY})
             if abs(new_cost - old_cost) < converged_tol:
                 break
             else:
@@ -68,7 +70,7 @@ def fit_linear_regression(trainX, trainY,
         print("Optimization Finished!")
 
     # extract value
-    training_cost = sess.run(cost)
+    training_cost = sess.run(cost, feed_dict={X: trainX, Y: trainY})
     trained_theta = sess.run(theta)
     trained_b = sess.run(b)
 
@@ -76,7 +78,8 @@ def fit_linear_regression(trainX, trainY,
                      'b': trained_b,
                      'cost': training_cost,
                      'nbepoch': epoch,
-                     'nbfeatures': nbfeatures.value,
-                     'nbtrain': nbtrain.value}
+                     'nbfeatures': nbfeatures,
+                     'nbtrain': nbtrain}
+    tf_sess = {'session': sess, 'inputs': X, 'outputs': pred_Y}
 
-    return fitted_params, sess
+    return fitted_params, tf_sess
