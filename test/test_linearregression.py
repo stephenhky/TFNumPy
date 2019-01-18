@@ -61,8 +61,8 @@ class LinearRegressionTester(unittest.TestCase):
             tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.4]])})[0][0],
             4.279628, 2)
         np.testing.assert_almost_equal(
-            tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
-            1.9492521, 1)
+            tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1.34]])})[0][0],
+            1.89471265, 1)
 
     def test_both(self):
         pass
