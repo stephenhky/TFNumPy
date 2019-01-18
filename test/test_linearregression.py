@@ -20,14 +20,14 @@ class LinearRegressionTester(unittest.TestCase):
         # check regression coefficients
         self.assertEqual(regressed_results['nbfeatures'], 1)
         self.assertEqual(regressed_results['nbtrain'], 4)
-        self.assertAlmostEqual(regressed_results['theta'][0], 2.30, 2)
-        self.assertAlmostEqual(regressed_results['b'], -1.20, 2)
+        np.testing.assert_almost_equal(regressed_results['theta'][0], 2.30, 2)
+        np.testing.assert_almost_equal(regressed_results['b'], -1.20, 2)
 
         # check prediction
-        self.assertAlmostEqual(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1]])})[0][0],
-                               1.1006711, 4)
-        self.assertAlmostEqual(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
-                               4.549828400000001, 4)
+        np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1]])})[0][0],
+                                       1.1006711, 4)
+        np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
+                                       4.549828400000001, 4)
 
     def test_ridge(self):
         ridge_reg = Ridge(alpha=0.1, solver='cholesky')
@@ -36,14 +36,14 @@ class LinearRegressionTester(unittest.TestCase):
         tfnp_reg, tfsess = fit_linear_regression(self.xtrain, self.ytrain, max_iter=2000, ridge_alpha=0.1)
 
         # check sklearn results
-        self.assertAlmostEqual(ridge_reg.predict([[1]])[0][0], 1.12241141, 2)
-        self.assertAlmostEqual(ridge_reg.predict([[2.5]])[0][0], 4.50498818, 2)
+        np.testing.assert_almost_equal(ridge_reg.predict([[1]])[0][0], 1.12241141, 2)
+        np.testing.assert_almost_equal(ridge_reg.predict([[2.5]])[0][0], 4.50498818, 2)
 
         # check tensorflow prediction
-        self.assertAlmostEqual(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1]])})[0][0],
-                               1.220062, 2)
-        self.assertAlmostEqual(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
-                               4.4537644, 2)
+        np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1]])})[0][0],
+                                       1.220062, 2)
+        np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
+                                       4.4537644, 2)
 
 
     def test_lasso(self):
