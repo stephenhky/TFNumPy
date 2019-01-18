@@ -2,7 +2,7 @@
 import unittest
 
 import numpy as np
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import Ridge, Lasso
 from tfnumpy.regression import fit_linear_regression
 
 
@@ -47,7 +47,22 @@ class LinearRegressionTester(unittest.TestCase):
 
 
     def test_lasso(self):
-        pass
+        lasso_reg = Lasso(alpha=0.1)
+        lasso_reg.fit(self.xtrain, self.ytrain)
+
+        # check sklearn results
+        np.testing.assert_almost_equal((lasso_reg.predict([[2.4]]))[0], 4.24807398)
+        np.testing.assert_almost_equal((lasso_reg.predict([[1.34]]))[0], 1.89471265)
+
+        regressed_results, tfsess = fit_linear_regression(self.xtrain, self.ytrain, max_iter=2000, lasso_alpha=0.1)
+
+        # check tensorflow prediction
+        np.testing.assert_almost_equal(
+            tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.4]])})[0][0],
+            4.279628, 2)
+        np.testing.assert_almost_equal(
+            tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
+            1.9492521, 1)
 
     def test_both(self):
         pass
