@@ -2,7 +2,7 @@
 import unittest
 
 import numpy as np
-from sklearn.linear_model import Ridge, Lasso
+from sklearn.linear_model import Ridge, Lasso, ElasticNet
 from tfnumpy.regression import fit_linear_regression
 
 
@@ -64,8 +64,24 @@ class LinearRegressionTester(unittest.TestCase):
             tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1.34]])})[0][0],
             1.89471265, 1)
 
-    def test_both(self):
-        pass
+    def test_elasticnet(self):
+        elasticnet_reg = ElasticNet(alpha=0.1, l1_ratio=0.5)
+        elasticnet_reg.fit(self.xtrain, self.ytrain)
+
+        # check sklearn results
+        np.testing.assert_almost_equal((elasticnet_reg.predict([[2.4]]))[0], 4.20583794)
+        np.testing.assert_almost_equal((elasticnet_reg.predict([[1.23]]))[0], 1.66316672)
+
+        regressed_results, tfsess = fit_linear_regression(self.xtrain, self.ytrain, max_iter=2000,
+                                                          ridge_alpha=0.1*0.5, lasso_alpha=0.1*0.5)
+
+        # check tensorflow prediction
+        np.testing.assert_almost_equal(
+            tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.4]])})[0][0],
+            4.20583794, 1)
+        np.testing.assert_almost_equal(
+            tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1.23]])})[0][0],
+            1.66316672, 1)
 
 
 
