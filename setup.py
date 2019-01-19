@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='tfnumpy',
-      version="0.0.1",
+      version="0.0.2a03",
       description="Collection of Simple Numerical Routines using TensorFlow",
       long_description="Collection of simple numerical routines that uses TensorFlow",
       classifiers=[
@@ -24,12 +24,13 @@ setup(name='tfnumpy',
       license='MIT',
       packages=['tfnumpy',
                 'tfnumpy.embed',
+                'tfnumpy.regression',
                 ],
       install_requires=[
           'numpy', 'tensorflow',
       ],
       tests_require=[
-          'unittest2',
+          'unittest2', 'scikit-learn',
       ],
       scripts=['bin/tfsammon'],
       include_package_data=True,
