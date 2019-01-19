@@ -5,10 +5,12 @@
 
 Functionalities:
 
-* Embedding: Sammon algorithm.
+* Embedding: Sammon algorithm;
+* Linear regression (with Ridge, Lasso, and ElasticNet).
 
 # News
 
+* 01/19/2019: `tfnumpy` 0.0.2 released.
 * 11/05/2018: `tfnumpy` 0.0.1 released.
 
 
