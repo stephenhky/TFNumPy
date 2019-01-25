@@ -67,7 +67,7 @@ class LinearRegressionTester(unittest.TestCase):
 
         # check tensorflow prediction
         np.testing.assert_almost_equal(tflinreg.predict(np.array([[2.4], [1.34]])),
-                                       np.array([[4.279628], [1.89471265]]), 2)
+                                       np.array([[4.279628], [1.89471265]]), 1)
         # np.testing.assert_almost_equal(
         #     tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.4]])})[0][0],
         #     4.279628, 2)
