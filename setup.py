@@ -24,7 +24,7 @@ setup(name='tfnumpy',
       license='MIT',
       packages=['tfnumpy',
                 'tfnumpy.embed',
-                'tfnumpy.regression'
+                'tfnumpy.regression',
                 'tfnumpy.naivebayes',
                 ],
       install_requires=[
