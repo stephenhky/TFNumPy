@@ -1,6 +1,8 @@
 
 import numpy as np
 import tensorflow as tf
+from .. import SupervisedClassifier
+from .. import ModelNotTrainedError
 
 
 def fit_linear_regression(trainX, trainY,
@@ -19,10 +21,6 @@ def fit_linear_regression(trainX, trainY,
     # placeholder
     X = tf.placeholder(tf.float32, shape=(None, nbfeatures), name='X')
     Y = tf.placeholder(tf.float32, shape=(None, 1), name='Y')
-
-    # Dimension placeholder
-    # nbtrain_var = X.shape[0]
-    # nbfeatures_var = X.shape[1]
 
     # fitting parameters
     theta = tf.Variable(np.random.uniform(size=(nbfeatures, 1)), name='theta', dtype='float')
@@ -83,3 +81,42 @@ def fit_linear_regression(trainX, trainY,
     tf_sess = {'session': sess, 'inputs': X, 'outputs': pred_Y}
 
     return fitted_params, tf_sess
+
+
+class TFLinearRegression(SupervisedClassifier):
+    def __init__(self, learning_rate=0.01,
+                 ridge_alpha=0.0,
+                 lasso_alpha=0.0,
+                 max_iter=1000,
+                 converged_tol=1e-8):
+        self.learning_rate = learning_rate
+        self.ridge_alpha = ridge_alpha
+        self.lasso_alpha = lasso_alpha
+        self.max_iter = max_iter
+        self.convered_tol = converged_tol
+        self.trained = False
+
+    def train(self, trainX, trainY, to_print=False, display_step=50):
+        fitted_param, tf_sess = fit_linear_regression(trainX, trainY,
+                                                      learning_rate=self.learning_rate,
+                                                      ridge_alpha=self.ridge_alpha,
+                                                      lasso_alpha=self.lasso_alpha,
+                                                      max_iter=self.max_iter,
+                                                      display_step=display_step,
+                                                      converged_tol=self.convered_tol,
+                                                      to_print=to_print
+                                                      )
+
+        self.fitted_param = fitted_param
+        self.tf_sess = tf_sess
+        self.trained = True
+
+    def predict(self, testX):
+        if not self.trained:
+            raise ModelNotTrainedError()
+        sess = self.tf_sess['session']
+        X = self.tf_sess['inputs']
+        Y = self.tf_sess['outputs']
+        return sess.run(Y, feed_dict={X: testX})
+
+
