@@ -2,6 +2,7 @@
 import numpy as np
 import tensorflow as tf
 from .. import SupervisedClassifier
+from .. import ModelNotTrainedError
 
 
 def fit_linear_regression(trainX, trainY,
@@ -93,6 +94,7 @@ class TFLinearRegression(SupervisedClassifier):
         self.lasso_alpha = lasso_alpha
         self.max_iter = max_iter
         self.convered_tol = converged_tol
+        self.trained = False
 
     def train(self, trainX, trainY, to_print=False, display_step=50):
         fitted_param, tf_sess = fit_linear_regression(trainX, trainY,
@@ -107,8 +109,11 @@ class TFLinearRegression(SupervisedClassifier):
 
         self.fitted_param = fitted_param
         self.tf_sess = tf_sess
+        self.trained = True
 
     def predict(self, testX):
+        if not self.trained:
+            raise ModelNotTrainedError()
         sess = self.tf_sess['session']
         X = self.tf_sess['inputs']
         Y = self.tf_sess['outputs']
