@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='tfnumpy',
-      version="0.0.3a01",
+      version="0.0.3a02",
       description="Collection of Simple Numerical Routines using TensorFlow",
       long_description="Collection of simple numerical routines that uses TensorFlow",
       classifiers=[
@@ -24,7 +24,8 @@ setup(name='tfnumpy',
       license='MIT',
       packages=['tfnumpy',
                 'tfnumpy.embed',
-                'tfnumpy.regression',
+                'tfnumpy.regression'
+                'tfnumpy.naivebayes',
                 ],
       install_requires=[
           'numpy', 'tensorflow',
