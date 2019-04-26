@@ -27,10 +27,6 @@ class LinearRegressionTester(unittest.TestCase):
 
         # check prediction
         np.testing.assert_almost_equal(tflinreg.predict(np.array([[1], [2.5]])), np.array([[1.1006711], [4.549828400000001]]), 4)
-        # np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1]])})[0][0],
-        #                                1.1006711, 4)
-        # np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
-        #                                4.549828400000001, 4)
 
     def test_ridge(self):
         ridge_reg = Ridge(alpha=0.1, solver='cholesky')
@@ -47,11 +43,6 @@ class LinearRegressionTester(unittest.TestCase):
         # check tensorflow prediction
         np.testing.assert_almost_equal(tflinreg.predict(np.array([[1], [2.5]])),
                                        np.array([[1.220062], [4.4537644]]), 2)
-        # np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1]])})[0][0],
-        #                                1.220062, 2)
-        # np.testing.assert_almost_equal(tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.5]])})[0][0],
-        #                                4.4537644, 2)
-
 
     def test_lasso(self):
         lasso_reg = Lasso(alpha=0.1)
@@ -68,12 +59,6 @@ class LinearRegressionTester(unittest.TestCase):
         # check tensorflow prediction
         np.testing.assert_almost_equal(tflinreg.predict(np.array([[2.4], [1.34]])),
                                        np.array([[4.279628], [1.89471265]]), 1)
-        # np.testing.assert_almost_equal(
-        #     tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.4]])})[0][0],
-        #     4.279628, 2)
-        # np.testing.assert_almost_equal(
-        #     tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1.34]])})[0][0],
-        #     1.89471265, 1)
 
     def test_elasticnet(self):
         elasticnet_reg = ElasticNet(alpha=0.1, l1_ratio=0.5)
@@ -91,12 +76,6 @@ class LinearRegressionTester(unittest.TestCase):
         # check tensorflow prediction
         np.testing.assert_almost_equal(tflinreg.predict(np.array([[2.4], [1.23]])),
                                        np.array([[4.20583794], [1.66316672]]), 1)
-        # np.testing.assert_almost_equal(
-        #     tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[2.4]])})[0][0],
-        #     4.20583794, 1)
-        # np.testing.assert_almost_equal(
-        #     tfsess['session'].run(tfsess['outputs'], feed_dict={tfsess['inputs']: np.array([[1.23]])})[0][0],
-        #     1.66316672, 1)
 
 
 
