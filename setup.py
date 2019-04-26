@@ -27,7 +27,6 @@ setup(name='tfnumpy',
                 'tfnumpy.embed',
                 'tfnumpy.regression',
                 'tfnumpy.utils',
-                'tfnumpy.naivebayes',
                 ],
       install_requires=[
           'numpy', 'tensorflow',
