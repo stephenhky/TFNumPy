@@ -27,6 +27,7 @@ setup(name='tfnumpy',
                 'tfnumpy.embed',
                 'tfnumpy.regression',
                 'tfnumpy.utils',
+                'tfnumpy.tensor',
                 ],
       install_requires=[
           'numpy', 'tensorflow',
