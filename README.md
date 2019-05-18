@@ -6,7 +6,8 @@
 Functionalities:
 
 * Embedding: Sammon algorithm;
-* Linear regression (with Ridge, Lasso, and ElasticNet).
+* Linear regression (with Ridge, Lasso, and ElasticNet);
+* Tensor Khatri-Rao Product.
 
 # News
 
