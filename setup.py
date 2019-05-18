@@ -6,10 +6,17 @@ def readme():
         return f.read()
 
 
+def package_description():
+    text = readme()
+    startpos = text.find('## Introduction')
+    return text[startpos:]
+
+
 setup(name='tfnumpy',
-      version="0.0.4",
+      version="0.0.5a0",
       description="Collection of Simple Numerical Routines using TensorFlow",
-      long_description="Collection of simple numerical routines that uses TensorFlow",
+      long_description=package_description(),
+      long_description_content_type='text/markdown',
       classifiers=[
           "Topic :: Scientific/Engineering :: Mathematics",
           "Programming Language :: Python :: 2.7",
