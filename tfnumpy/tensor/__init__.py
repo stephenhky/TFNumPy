@@ -1,2 +1,2 @@
 
-from .product import khatrirao_product
+from .product import tf_khatrirao_product, khatrirao_product

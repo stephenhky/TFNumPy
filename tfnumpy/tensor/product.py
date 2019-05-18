@@ -11,7 +11,8 @@ def tf_khatrirao_product(tensor1, tensor2):
                               shape_invariants=[i0.get_shape(), tf.TensorShape([None, None])])
     return khprod
 
-def tf_khatrirao_product(matrix1, matrix2, tfsess=None):
+
+def khatrirao_product(matrix1, matrix2, tfsess=None):
     if tfsess==None:
         sess = tf.Session()
     else:
