@@ -1,7 +1,13 @@
 
 import tensorflow as tf
 
+# Kronecker Product
 
+# TODO: implement it!
+
+
+
+# Khatri-Rao Product
 def tf_khatrirao_product(tensor1, tensor2):
     i0 = tf.constant(1)
     prod0 = tf.multiply(tensor1[0, :], tensor2)
