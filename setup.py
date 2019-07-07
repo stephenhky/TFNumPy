@@ -13,7 +13,7 @@ def package_description():
 
 
 setup(name='tfnumpy',
-      version="0.0.5a0",
+      version="0.0.5a3",
       description="Collection of Simple Numerical Routines using TensorFlow",
       long_description=package_description(),
       long_description_content_type='text/markdown',
@@ -37,7 +37,7 @@ setup(name='tfnumpy',
                 'tfnumpy.tensor',
                 ],
       install_requires=[
-          'numpy', 'tensorflow>=2.0.0',
+          'numpy', 'tensorflow',
       ],
       tests_require=[
           'unittest', 'scikit-learn',
