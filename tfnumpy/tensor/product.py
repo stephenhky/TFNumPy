@@ -2,8 +2,45 @@
 import tensorflow as tf
 
 # Kronecker Product
+def tf_kronecker_product(tm1, tm2):
+    kprod0 = tf.multiply(tm1[0, 0], tm2)
 
-# TODO: implement it!
+    j0 = tf.constant(1)
+    _, kprod = tf.while_loop(lambda j, m: tf.less(j, tm1.shape[1]),
+                             lambda j, m: [j + 1, tf.concat([m, tf.multiply(tm1[0, j], tm2)], axis=1)],
+                             loop_vars=[j0, kprod0],
+                             shape_invariants=[j0.get_shape(), tf.TensorShape([tm1.shape[0], None])])
+
+    for i in range(1, tm1.shape[0]):
+        kprod0 = tf.multiply(tm1[i, 0], tm2)
+
+        j0 = tf.constant(1)
+        _, kprod1 = tf.while_loop(lambda j, m: tf.less(j, tm1.shape[1]),
+                                  lambda j, m: [j + 1, tf.concat([m, tf.multiply(tm1[i, j], tm2)], axis=1)],
+                                  loop_vars=[j0, kprod0],
+                                  shape_invariants=[j0.get_shape(), tf.TensorShape([tm1.shape[0], None])])
+
+        kprod = tf.concat([kprod, kprod1], axis=0)
+
+    return kprod
+
+
+def kronecker_product(matrix1, matrix2, tfsess=None):
+    if tfsess==None:
+        sess = tf.Session()
+    else:
+        sess = tfsess
+
+    tm1 = tf.constant(matrix1)
+    tm2 = tf.constant(matrix2)
+
+    if tfsess:
+        init = tf.global_variables_initializer()
+        sess.run(init)
+
+    kresult = sess.run(tf_kronecker_product(tm1, tm2))
+
+    return kresult
 
 
 
