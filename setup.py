@@ -37,7 +37,7 @@ setup(name='tfnumpy',
                 'tfnumpy.tensor',
                 ],
       install_requires=[
-          'numpy', 'tensorflow',
+          'numpy', 'tensorflow>=2.0.0',
       ],
       tests_require=[
           'unittest2', 'scikit-learn',
