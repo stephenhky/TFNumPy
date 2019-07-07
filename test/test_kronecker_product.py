@@ -23,6 +23,6 @@ class test_KJ(unittest.TestCase):
         self.assertTrue(np.allclose(self.answer, result, rtol=1e-5))
 
     def test_predefinedsession(self):
-        sess = tf.Session()
+        sess = tf.compat.v1.Session()
         result = kronecker_product(self.x1, self.x2, tfsess=sess)
         self.assertTrue(np.allclose(self.answer, result, rtol=1e-5))
