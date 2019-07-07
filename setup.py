@@ -37,10 +37,10 @@ setup(name='tfnumpy',
                 'tfnumpy.tensor',
                 ],
       install_requires=[
-          'numpy', 'tensorflow>=2.0.0',
+          'numpy', 'tensorflow',
       ],
       tests_require=[
-          'unittest', 'scikit-learn',
+          'unittest2', 'scikit-learn',
       ],
       scripts=['bin/tfsammon'],
       include_package_data=True,
