@@ -40,7 +40,7 @@ setup(name='tfnumpy',
           'numpy', 'tensorflow',
       ],
       tests_require=[
-          'unittest', 'scikit-learn',
+          'unittest2', 'scikit-learn',
       ],
       scripts=['bin/tfsammon'],
       include_package_data=True,
