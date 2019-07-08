@@ -8,7 +8,7 @@ def readme():
 
 def package_description():
     text = readme()
-    startpos = text.find('## Introduction')
+    startpos = text.find('# Numerical Python using TensorFlow')
     return text[startpos:]
 
 
