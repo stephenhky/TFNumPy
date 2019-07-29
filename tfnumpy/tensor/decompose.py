@@ -6,9 +6,6 @@ import tensorflow as tf
 def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
     dim0, dim1, dim2 = matrix.shape
 
-    # X = tf.placeholder(tf.float32, shape=(None, None, None), name='X')
-    # X_shape = tf.shape(X)
-    # Xdim0, Xdim1, Xdim2 = X_shape[0], X_shape[1], X_shape[2]
     X = tf.placeholder(tf.float32, shape=(dim0, dim1, dim2), name='X')
 
     X0 = tf.reshape(tf.transpose(X, perm=(0, 2, 1)), shape=(dim0, dim1 * dim2))
@@ -41,5 +38,4 @@ def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
 
 
 
-# Jenrich's algorithm
 # Tucker decomposition
