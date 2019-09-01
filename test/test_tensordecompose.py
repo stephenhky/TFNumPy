@@ -16,7 +16,7 @@ class test_decompose(unittest.TestCase):
         x[:, :, 0] = x1
         x[:, :, 1] = x2
 
-        A, B, C = rank3tensor_decomposition_ALS(x, k=2, nbiter=1000000)
+        A, B, C = rank3tensor_decomposition_ALS(x, k=2, nbiter=10000)
 
         # validation
         mat = np.zeros((A.shape[0], B.shape[0], C.shape[0]))
