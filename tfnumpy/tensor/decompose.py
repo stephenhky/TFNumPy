@@ -1,6 +1,7 @@
 
 import numpy as np
 import tensorflow as tf
+from . import khatrirao_product
 
 
 def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
@@ -30,11 +31,11 @@ def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
     sess.run(init)
 
     for _ in range(nbiter):
-        sess.run(trainA, feed_dict={X: x})
-        sess.run(trainB, feed_dict={X: x})
-        sess.run(trainC, feed_dict={X: x})
+        sess.run(trainA, feed_dict={X: matrix})
+        sess.run(trainB, feed_dict={X: matrix})
+        sess.run(trainC, feed_dict={X: matrix})
 
-    return sess.run((A, B, C), feed_dict={X: x})
+    return sess.run((A, B, C), feed_dict={X: matrix})
 
 
 
