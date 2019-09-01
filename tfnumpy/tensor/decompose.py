@@ -1,7 +1,7 @@
 
 import numpy as np
 import tensorflow as tf
-from . import khatrirao_product
+from . import tf_khatrirao_product
 
 
 def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
@@ -17,9 +17,9 @@ def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
     B = tf.Variable(initial_value=tf.random_normal([dim1, k]), name='B')
     C = tf.Variable(initial_value=tf.random_normal([dim2, k]), name='C')
 
-    costA = tf.reduce_sum(tf.abs(X0 - tf.matmul(A, tf.transpose(khatrirao_product(C, B)))))
-    costB = tf.reduce_sum(tf.abs(X1 - tf.matmul(B, tf.transpose(khatrirao_product(C, A)))))
-    costC = tf.reduce_sum(tf.abs(X2 - tf.matmul(C, tf.transpose(khatrirao_product(B, A)))))
+    costA = tf.reduce_sum(tf.abs(X0 - tf.matmul(A, tf.transpose(tf_khatrirao_product(C, B)))))
+    costB = tf.reduce_sum(tf.abs(X1 - tf.matmul(B, tf.transpose(tf_khatrirao_product(C, A)))))
+    costC = tf.reduce_sum(tf.abs(X2 - tf.matmul(C, tf.transpose(tf_khatrirao_product(B, A)))))
 
     trainA = tf.train.GradientDescentOptimizer(alpha).minimize(costA)
     trainB = tf.train.GradientDescentOptimizer(alpha).minimize(costB)
