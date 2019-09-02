@@ -8,10 +8,12 @@ Functionalities:
 
 * Embedding: Sammon algorithm;
 * Linear regression (with Ridge, Lasso, and ElasticNet);
-* Tensor products: Khatri-Rao product and Kronecker product.
+* Tensor products: Khatri-Rao product and Kronecker product;
+* Tensor decomposition using ALS.
 
 # News
 
+* 09/02/2019: `tfnumpy` 0.0.6 released.
 * 07/07/2019: `tfnumpy` 0.0.5 released.
 * 05/18/2019: `tfnumpy` 0.0.4 released.
 * 04/25/2019: `tfnumpy` 0.0.3 released.
