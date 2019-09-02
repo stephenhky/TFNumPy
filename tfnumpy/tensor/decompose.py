@@ -37,6 +37,3 @@ def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
 
     return sess.run((A, B, C), feed_dict={X: matrix})
 
-
-
-# Tucker decomposition
