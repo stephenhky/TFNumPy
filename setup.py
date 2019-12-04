@@ -13,14 +13,13 @@ def package_description():
 
 
 setup(name='tfnumpy',
-      version="0.0.5",
+      version="0.1.0a01",
       description="Collection of Simple Numerical Routines using TensorFlow",
       long_description=package_description(),
       long_description_content_type='text/markdown',
       classifiers=[
           "Topic :: Scientific/Engineering :: Mathematics",
           "Programming Language :: Python :: 2.7",
-          "Programming Language :: Python :: 3.5",
           "Programming Language :: Python :: 3.6",
           "Programming Language :: Python :: 3.7",
           "License :: OSI Approved :: MIT License",
