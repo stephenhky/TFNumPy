@@ -27,7 +27,7 @@ def tf_kronecker_product(tm1, tm2):
 
 def kronecker_product(matrix1, matrix2, tfsess=None):
     if tfsess==None:
-        sess = tf.compat.v1.Session()
+        sess = tf.Session()
     else:
         sess = tfsess
 
@@ -57,7 +57,7 @@ def tf_khatrirao_product(tensor1, tensor2):
 
 def khatrirao_product(matrix1, matrix2, tfsess=None):
     if tfsess==None:
-        sess = tf.compat.v1.Session()
+        sess = tf.Session()
     else:
         sess = tfsess
 

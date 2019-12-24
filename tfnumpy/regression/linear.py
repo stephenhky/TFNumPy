@@ -41,7 +41,7 @@ def fit_linear_regression(trainX, trainY,
     optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
     initializer = tf.global_variables_initializer()
 
-    sess = tf.compat.v1.Session()
+    sess = tf.Session()
     sess.run(initializer)
 
     old_cost = sess.run(cost, feed_dict={X: trainX, Y: trainY})

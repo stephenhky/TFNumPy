@@ -31,7 +31,7 @@ def sammon_embedding(Xmat, initYmat, tol=1e-8, alpha=0.3, nbsteps=1000, to_print
     init = tf.global_variables_initializer()
 
     # Tensorflow session
-    sess = tf.compat.v1.Session()
+    sess = tf.Session()
     sess.run(init)
 
     # training
