@@ -1,10 +1,13 @@
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from . import tf_khatrirao_product
 
 
 def rank3tensor_decomposition_ALS(matrix, k, alpha=0.01, nbiter=1000):
+    # disable eager execution
+    tf.disable_eager_execution()
+
     dim0, dim1, dim2 = matrix.shape
 
     X = tf.placeholder(tf.float32, shape=(dim0, dim1, dim2), name='X')
