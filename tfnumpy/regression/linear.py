@@ -13,6 +13,9 @@ def fit_linear_regression(trainX, trainY,
                           display_step=50,
                           converged_tol=1e-8,
                           to_print=False):
+    # disable eager execution
+    tf.disable_eager_execution()
+
     # check dimensions
     assert trainX.shape[0] == trainY.shape[0]   # number of training data the same
     nbtrain = trainX.shape[0]

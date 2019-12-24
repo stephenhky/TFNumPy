@@ -3,6 +3,9 @@ import tensorflow.compat.v1 as tf
 
 # Kronecker Product
 def tf_kronecker_product(tm1, tm2):
+    # disable eager execution
+    tf.disable_eager_execution()
+
     kprod0 = tf.multiply(tm1[0, 0], tm2)
 
     j0 = tf.constant(1)
@@ -46,6 +49,9 @@ def kronecker_product(matrix1, matrix2, tfsess=None):
 
 # Khatri-Rao Product
 def tf_khatrirao_product(tensor1, tensor2):
+    # disable eager execution
+    tf.disable_eager_execution()
+
     i0 = tf.constant(1)
     prod0 = tf.multiply(tensor1[0, :], tensor2)
     _, khprod = tf.while_loop(lambda i, m: tf.less(i, tf.shape(tensor1)[0]),
