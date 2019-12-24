@@ -1,5 +1,5 @@
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 # Kronecker Product
 def tf_kronecker_product(tm1, tm2):

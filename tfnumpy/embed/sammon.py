@@ -1,5 +1,5 @@
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 def sammon_embedding(Xmat, initYmat, tol=1e-8, alpha=0.3, nbsteps=1000, to_print=False):
     N = Xmat.shape[0]
