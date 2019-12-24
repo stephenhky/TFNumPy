@@ -13,7 +13,7 @@ def package_description():
 
 
 setup(name='tfnumpy',
-      version="0.1.0a01",
+      version="0.1.0",
       description="Collection of Simple Numerical Routines using TensorFlow",
       long_description=package_description(),
       long_description_content_type='text/markdown',
