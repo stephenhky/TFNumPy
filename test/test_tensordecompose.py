@@ -1,7 +1,7 @@
 
 import unittest
 import numpy as np
-import numpy.testing as npt
+# import numpy.testing as npt
 from itertools import product
 
 from tfnumpy.tensor import rank3tensor_decomposition_ALS
