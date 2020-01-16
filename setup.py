@@ -19,7 +19,6 @@ setup(name='tfnumpy',
       long_description_content_type='text/markdown',
       classifiers=[
           "Topic :: Scientific/Engineering :: Mathematics",
-          "Programming Language :: Python :: 3.5",
           "Programming Language :: Python :: 3.6",
           "Programming Language :: Python :: 3.7",
           "License :: OSI Approved :: MIT License",

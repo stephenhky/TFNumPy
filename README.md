@@ -13,6 +13,7 @@ Functionalities:
 
 # News
 
+* 01/16/2020: `tfnumpy` 0.1.1 released.
 * 12/24/2019: `tfnumpy` 0.1.0 released.
 * 09/02/2019: `tfnumpy` 0.0.6 released.
 * 07/07/2019: `tfnumpy` 0.0.5 released.
