@@ -6,6 +6,7 @@ python:
 dist: xenial
 sudo: true
 install:
+  - pip install -U tensorflow>=2.0.0;
   - pip install -U scikit-learn
   - pip install -U .
 # command to run tests
